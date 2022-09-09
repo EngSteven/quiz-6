@@ -22,11 +22,17 @@ class Flight {
         time_t flightTime;
         tm *currentTime;
         string aerolinea;
-        int numeroDeVuelo;
+        int numeroVuelo;
         int cantidadPasajeros;
+        int hour;
+        int minutes;
 
     public: 
-        Flight(int pHour, int pMinutes) {
+        Flight(int pHour, int pMinutes, int pNumeroVuelo, int pCantidadPasajeros) {
+            this->hour = pHour;
+            this->minutes = pMinutes;
+            this->numeroVuelo = pNumeroVuelo;
+            this->cantidadPasajeros = pCantidadPasajeros; 
             flightTime = time(NULL);
             currentTime = localtime(&flightTime);
             currentTime->tm_hour = pHour;
@@ -41,8 +47,20 @@ class Flight {
         }
 
         int getIntTimeValue() {
-            int result = currentTime->tm_hour;
+            int result = getCurrentHour();
             return result;
+        }
+
+        int getCurrentHour(){
+            return hour;
+        }
+
+        int getNumeroVuelo(){
+            return numeroVuelo;
+        }
+
+        int getCantidadPasajeros(){
+            return cantidadPasajeros;
         }
 
         void changeFlightTime(){
